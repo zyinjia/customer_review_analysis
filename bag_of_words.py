@@ -16,7 +16,7 @@ stopwds.discard('nor')
 def get_data(path='./data_bagofwords/data.csv'):
     df = pd.read_csv(path, encoding='utf-8')
     df = df.drop('Unnamed: 0', 1)
-    df = df[df.Reviews.notnull()]
+    df = df[df.Reviews_bw.notnull()]
     return df
 
 
@@ -61,11 +61,11 @@ def get_train_features_bw(reviews_train, vectorizer):
 
 def get_test_features_bw(reviews_test, vectorizer):
     test_features = vectorizer.transform(reviews_test)
-    test_features = test_data_features.toarray()
+    test_features = test_features.toarray()
     return test_features
 
 def get_similarity_matrix(train_features_normalized):
-    n = train_features_normalized.shape[1]
+    n = train_features_normalized.shape[0]
     sim_matrix = np.zeros((n,n))
     for i in range(n):
         for j in range(n):
